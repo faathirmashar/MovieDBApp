@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import id.sharekom.moviedbapp.data.MovieTvDataSource
+import id.sharekom.moviedbapp.data.MovieDataSource
 import id.sharekom.moviedbapp.data.model.detailmovie.DetailMovieResponse
 import id.sharekom.moviedbapp.data.model.genres.Genre
 import id.sharekom.moviedbapp.data.model.movie.MovieResult
@@ -15,22 +15,22 @@ import id.sharekom.moviedbapp.data.model.video.VideoResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
-class MovieViewModel(private val movieTvDataSource: MovieTvDataSource) : ViewModel() {
+class MovieViewModel(private val movieDataSource: MovieDataSource) : ViewModel() {
     // Movie Genres
-    fun getMovieGenres(): Flow<PagingData<Genre>> = movieTvDataSource.getMovieGenres().cachedIn(viewModelScope)
+    fun getMovieGenres(): Flow<PagingData<Genre>> = movieDataSource.getMovieGenres().cachedIn(viewModelScope)
 
     // Movies By Genres
-    fun getMoviesByGenre(genreId: Int): Flow<PagingData<MovieResult>> = movieTvDataSource.getMoviesByGenre(genreId).cachedIn(viewModelScope)
+    fun getMoviesByGenre(genreId: Int): Flow<PagingData<MovieResult>> = movieDataSource.getMoviesByGenre(genreId).cachedIn(viewModelScope)
 
     // Reviews
-    fun getReviews(movieId: Int): Flow<PagingData<ReviewsResult>> = movieTvDataSource.getReviews(movieId).cachedIn(viewModelScope)
+    fun getReviews(movieId: Int): Flow<PagingData<ReviewsResult>> = movieDataSource.getReviews(movieId).cachedIn(viewModelScope)
 
     // Detail Movie
     fun getDetailMovie(movieId: Int) : MutableState<DetailMovieResponse?> {
         val detailMovie: MutableState<DetailMovieResponse?> = mutableStateOf(null)
 
         viewModelScope.launch {
-            movieTvDataSource.getDetailMovie(movieId)
+            movieDataSource.getDetailMovie(movieId)
                 .collect{ response ->
                     detailMovie.value = response
                 }
@@ -44,7 +44,7 @@ class MovieViewModel(private val movieTvDataSource: MovieTvDataSource) : ViewMod
         val video: MutableState<VideoResponse?> = mutableStateOf(null)
 
         viewModelScope.launch {
-            movieTvDataSource.getVideo(movieId)
+            movieDataSource.getVideo(movieId)
                 .collect{ response ->
                     video.value = response
                 }

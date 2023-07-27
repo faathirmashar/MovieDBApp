@@ -8,7 +8,7 @@ import id.sharekom.moviedbapp.data.model.review.ReviewsResult
 import id.sharekom.moviedbapp.data.model.video.VideoResponse
 import kotlinx.coroutines.flow.Flow
 
-interface MovieTvDataSource {
+interface MovieDataSource {
     // Movie Genres
     fun getMovieGenres() : Flow<PagingData<Genre>>
 

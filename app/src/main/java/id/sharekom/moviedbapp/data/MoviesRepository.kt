@@ -11,8 +11,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 
-class MoviesTvRepository constructor(private val remoteDataSource: RemoteDataSource):
-    MovieTvDataSource {
+class MoviesRepository constructor(private val remoteDataSource: RemoteDataSource):
+    MovieDataSource {
     // Movie Genres
     override fun getMovieGenres(): Flow<PagingData<Genre>> = remoteDataSource.getMovieGenres()
 

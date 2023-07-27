@@ -2,8 +2,8 @@ package id.sharekom.moviedbapp.di
 
 import id.sharekom.moviedbapp.BuildConfig
 import id.sharekom.moviedbapp.MovieViewModel
-import id.sharekom.moviedbapp.data.MovieTvDataSource
-import id.sharekom.moviedbapp.data.MoviesTvRepository
+import id.sharekom.moviedbapp.data.MovieDataSource
+import id.sharekom.moviedbapp.data.MoviesRepository
 import id.sharekom.moviedbapp.data.remote.ApiService
 import id.sharekom.moviedbapp.data.remote.RemoteDataSource
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -24,7 +24,7 @@ val networkModule = module {
 
 val repositoryModule = module {
     single { RemoteDataSource(get()) }
-    single <MovieTvDataSource> { MoviesTvRepository(get()) }
+    single <MovieDataSource> { MoviesRepository(get()) }
 }
 
 val viewModelModule = module {
